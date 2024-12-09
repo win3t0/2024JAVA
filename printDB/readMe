@@ -1,1 +1,66 @@
+MySQL Connector/J를 Windows에서 Eclipse와 함께 사용할 때는 **JAR 파일**만 있으면 됩니다. 다운로드와 설정 과정을 단계별로 정리했습니다.
 
+---
+
+### **1. MySQL Connector/J 다운로드**
+1. **공식 다운로드 페이지로 이동**:
+   [MySQL Connector/J 다운로드 페이지](https://dev.mysql.com/downloads/connector/j/)에서 최신 버전을 다운로드합니다.
+
+2. **플랫폼 독립형 ZIP 파일 선택**:
+   - 플랫폼에 상관없이 사용할 수 있는 "Platform Independent" 버전을 다운로드합니다.
+   - 파일 이름: `mysql-connector-java-8.x.x.zip`
+
+---
+
+### **2. 압축 해제**
+다운로드한 ZIP 파일을 압축 해제하면 다양한 파일과 폴더가 표시됩니다.
+
+#### 주요 파일:
+- **`mysql-connector-java-8.x.x.jar`**:
+  - 이 파일이 핵심입니다. 프로젝트에서 이 JAR 파일만 추가하면 됩니다.
+- `README.txt`, `LICENSE.txt` 등은 참고 문서이며, 사용하지 않아도 됩니다.
+
+---
+
+### **3. Eclipse에 JAR 파일 추가**
+1. Eclipse에서 사용 중인 프로젝트를 열고, **프로젝트를 우클릭**합니다.
+2. `Build Path` → `Add External Archives...` 선택.
+3. 압축 해제한 폴더에서 `mysql-connector-java-8.x.x.jar` 파일을 선택.
+4. 추가 후 프로젝트의 `Referenced Libraries` 섹션에서 JAR 파일이 보이는지 확인.
+
+---
+
+### **4. 테스트 코드 작성**
+정상적으로 추가되었는지 확인하려면 다음 테스트 코드를 실행합니다:
+```java
+public class TestMySQLConnection {
+    public static void main(String[] args) {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            System.out.println("MySQL JDBC Driver 로드 성공!");
+        } catch (ClassNotFoundException e) {
+            System.out.println("JDBC Driver를 찾을 수 없습니다.");
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+---
+
+### **5. 추가 확인 사항**
+- **MySQL 버전과 드라이버 호환성**:
+  - MySQL 서버 버전이 8.0 이상이면 최신 드라이버(`8.x.x`)를 사용합니다.
+  - MySQL 서버가 5.x 버전이면 구 버전의 `mysql-connector-java 5.x.x.jar`를 다운로드하세요.
+- **Eclipse 실행 환경**:
+  - JDK와 드라이버 버전의 호환성을 확인하세요.
+  - MySQL Connector/J는 Java 8 이상에서 잘 작동합니다.
+
+---
+
+### **요약**
+1. [MySQL Connector/J 공식 페이지](https://dev.mysql.com/downloads/connector/j/)에서 "Platform Independent" 버전을 다운로드.
+2. 압축 해제 후 `mysql-connector-java-8.x.x.jar` 파일만 사용.
+3. Eclipse 프로젝트에 JAR 파일 추가 후 테스트.
+
+설정 과정에서 문제가 있으면 알려주세요! 😊
