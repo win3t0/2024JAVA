@@ -1,4 +1,4 @@
-package week7_homework;
+package project;
 import java.util.Scanner;
 
 class Game {
@@ -10,12 +10,12 @@ class Game {
         createPlayers();
         System.out.println("오너를 결정하기 위해 가위바위보를 시작합니다.");
 
-        // 가위바위보를 통해 오너 결정
+
         while (true) {
             String userChoice = players[0].next();
             String computerChoice = players[1].next();
             if (isDraw(userChoice, computerChoice)) {
-                System.out.println("비겼습니다. 다시 가위바위보를 진행합니다.");
+                System.out.println("무승부, 게임을 다시 진행합니다.");
             } else if (isWin(userChoice, computerChoice)) {
                 System.out.println(players[0].getName() + "이 오너로 결정되었습니다.");
                 owner = players[0];
@@ -27,7 +27,7 @@ class Game {
             }
         }
 
-        // 묵찌빠 게임 진행
+
         System.out.println("묵찌빠 게임을 시작합니다.");
         while (true) {
             Player challenger = (owner == players[0]) ? players[1] : players[0];
