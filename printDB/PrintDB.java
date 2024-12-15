@@ -16,9 +16,9 @@ public class PrintDB {
         JTable table = new JTable(model);
 
         // 컬럼 추가
-        model.addColumn("ID");
         model.addColumn("Name");
-        model.addColumn("Dept");
+        model.addColumn("Price");
+        model.addColumn("Quantity");
 
         // DB 연결 정보
         String url = "jdbc:mysql://localhost:3306/sakila?useSSL=false&serverTimezone=UTC";
@@ -33,17 +33,17 @@ public class PrintDB {
             Connection conn = DriverManager.getConnection(url, user, password);
 
             // SQL 쿼리 실행
-            String query = "SELECT id, name, dept FROM student";
+            String query = "SELECT name, price, quantity FROM shop";
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(query);
 
             // 결과를 JTable에 추가
             while (rs.next()) {
-                int id = rs.getInt("id");
-                String name = rs.getString("name");
-                String dept = rs.getString("dept");
+            	String name = rs.getString("name");
+                int price = rs.getInt("price");
+                int quantity = rs.getInt("quantity");
 
-                model.addRow(new Object[]{id, name, dept});
+                model.addRow(new Object[]{name, price, quantity});
             }
 
             // 리소스 닫기
